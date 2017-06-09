@@ -1,9 +1,10 @@
 package co.deonna.helloworld;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.TextView;
 
 import java.util.Date;
@@ -11,9 +12,10 @@ import java.util.Date;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Observable;
-import io.reactivex.functions.Consumer;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     @BindView(R.id.hello_world_salute)
     TextView helloText;
@@ -35,13 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
         Observable
                 .just("Hello! Please use this app responsibly!")
-                .subscribe(new Consumer<String>() {
-
-                    @Override
-                    public void accept(String s) throws Exception {
-
-                        helloText.setText(s);
-                    }
+                .subscribe(s -> {
+                    helloText.setText(s);
                 });
     }
 
@@ -66,12 +63,9 @@ public class MainActivity extends AppCompatActivity {
                     new StockUpdate("APPL", 645.1, new Date()),
                     new StockUpdate("TWTR", 1.43, new Date())
                 )
-                .subscribe(new Consumer<StockUpdate>() {
-                    @Override
-                    public void accept(StockUpdate stockUpdate) throws Exception {
-
-                        stockDataAdapter.add(stockUpdate);
-                    }
+                .subscribe( stockUpdate -> {
+                    Log.d(TAG, "New update " + stockUpdate.getStockSymbol());
+                    stockDataAdapter.add(stockUpdate);
                 });
     }
 }
