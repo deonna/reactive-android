@@ -1,5 +1,7 @@
-package co.deonna.helloworld;
+package co.deonna.helloworld.yahoo;
 
+import co.deonna.helloworld.yahoo.json.YahooStockResult;
+import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 

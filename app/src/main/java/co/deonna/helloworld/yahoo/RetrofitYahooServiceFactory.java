@@ -1,7 +1,8 @@
-package co.deonna.helloworld;
+package co.deonna.helloworld.yahoo;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
+import co.deonna.helloworld.yahoo.YahooService;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -26,4 +27,9 @@ public class RetrofitYahooServiceFactory {
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl("https://query.yahooapis.com/v1/public/")
             .build();
+
+    public YahooService create() {
+
+        return retrofit.create(YahooService.class);
+    }
 }
